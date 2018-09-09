@@ -8,3 +8,13 @@ const log = require("./logger")
 console.log(log);
 
 log('message');
+
+console.log(__filename);
+console.log(__dirname);
+
+/*
+    Module wrapper function
+    (function(exports, require, module, __filename, __dirname){
+        //code
+    })
+*/
