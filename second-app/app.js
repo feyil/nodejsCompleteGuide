@@ -1,10 +1,10 @@
 // ../ parent folder
 // >jshint app.js
 // Making const we can get compile time error not run time for any changes
-const logger = require("./logger")
+const log = require("./logger")
 
 //logger = 1
 
-console.log(logger);
+console.log(log);
 
-logger.log('message');
+log('message');
