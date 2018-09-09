@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lion-lib-feyil": "^1.0.0"
+    "lion-lib-feyil": "^1.1.0"
   }
 }

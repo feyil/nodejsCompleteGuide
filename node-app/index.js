@@ -1,6 +1,8 @@
 
 var lion = require("lion-lib-feyil");
 
-var result = lion.add(5,4);
+var sumResult = lion.add(5,4);
+var multiplicationResult = lion.multiply(10,3);
 
-console.log(result);
+console.log(sumResult);
+console.log(multiplicationResult)
