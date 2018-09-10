@@ -1,3 +1,5 @@
+const morgan = require("morgan");
+const helmet = require("helmet");
 const Joi = require("joi");
 const express = require("express");
 const logger = require("./logger");
@@ -8,7 +10,8 @@ const app = express();
 app.use(express.json()); // middleware function
 app.use(express.urlencoded({ extended: true})); // key=value&key=value
 app.use(express.static("public"));
-
+app.use(helmet());
+app.use(morgan("tiny"));
 
 app.use(logger);
 
