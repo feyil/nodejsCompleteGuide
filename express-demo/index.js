@@ -1,5 +1,6 @@
 
 const express = require("express");
+const Joi = require("joi");
 
 const app = express();
 
@@ -33,9 +34,15 @@ app.get("/api/courses/:id", (req, res) => {
 });
 
 app.post("/api/courses", (req, res) => {
-    if (!req.body.name || req.body.name.length < 3) {
+    const schema = {
+        name: Joi.string().min(3).required()
+    };
+
+    const result = Joi.validate(req.body, schema);
+
+    if (result.error) {
         // 400 Bad Request
-        res.status(400).send("Name is required and shoudl be minimum 3 char");
+        res.status(400).send(result.error.details[0].message);
         return;
     }
     const course = {
