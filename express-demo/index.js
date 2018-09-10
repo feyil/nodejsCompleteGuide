@@ -29,7 +29,7 @@ app.get("/api/courses", (req, res) => {
 app.get("/api/courses/:id", (req, res) => {
     const course = courses.find(c => c.id === parseInt(req.params.id));
     // we can use let if we want to reset the value later
-    if (!course) res.status(404).send("The course with the given ıd was not found");
+    if (!course) return res.status(404).send("The course with the given ıd was not found");
     res.send(course);
 });
 
@@ -52,7 +52,7 @@ app.put("/api/courses/:id", (req, res) => {
     // Look up the course
     // If not existing, return 404
     const course =  courses.find(c => c.id === parseInt(req.params.id));
-    if (!course) res.status(404).send("The course with the given ID was not exist");
+    if (!course) return res.status(404).send("The course with the given ID was not exist");
 
 
     // Validate
@@ -82,6 +82,22 @@ app.get("/api/posts/:year/:month", (req, res) => {
     res.send(req.params);
     // res.send(req.query);
 });
+
+app.delete("/api/courses/:id", (req, res) => {
+    // Look up the course
+    // If course was not exist return 404 
+    const course = courses.find(c => c.id === parseInt(req.params.id));
+    if (!course) {
+        res.status(404).send("The course with the given ID was not exist.");
+        return;
+    }
+    // Delete
+    const index = courses.indexOf(course);
+    courses.splice(index, 1);
+
+    // Return the same course
+    res.send(course);
+})
 
 
 // PORT
