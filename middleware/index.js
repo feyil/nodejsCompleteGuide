@@ -6,6 +6,9 @@ const authenticate = require("./authenticate");
 const app = express();
 
 app.use(express.json()); // middleware function
+app.use(express.urlencoded({ extended: true})); // key=value&key=value
+app.use(express.static("public"));
+
 
 app.use(logger);
 
