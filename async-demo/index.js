@@ -1,19 +1,27 @@
 
 console.log("Before");
 
-getUser(1, (user) => {
-    console.log("User",user);
-
-    getRepositories(user.getRepositories, (repos) => {
-        console.log("Repos: " ,repos);
-    });
-});
+getUser(1, displayUser);
 
 // Callbacks
 // Promises
 // Async / await
 
 console.log("After");
+
+function displayCommits(commits) {
+    console.log(commits);
+}
+
+function displayRepos(repos) {
+    console.log(repos);
+ //   getCommits(repo, displayCommits);
+}
+
+function displayUser(user) {
+    console.log("User", user);
+    getRepositories(user.getRepositories, displayRepos);
+}
 
 function getUser(id, callback) {
     setTimeout(() => {
