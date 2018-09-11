@@ -3,6 +3,10 @@ console.log("Before");
 
 getUser(1, (user) => {
     console.log("User",user);
+
+    getRepositories(user.getRepositories, (repos) => {
+        console.log("Repos: " ,repos);
+    });
 });
 
 // Callbacks
@@ -17,6 +21,7 @@ function getUser(id, callback) {
         callback({ id: id, gitHubUsername: "furkan"});
     }, 2000);
 }
+
 
 function getRepositories(username, callback) {
     setTimeout(() => {
