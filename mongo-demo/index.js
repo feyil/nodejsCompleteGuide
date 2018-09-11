@@ -43,6 +43,11 @@ async function getCourses() {
     // or
     // and
 
+    // /api/courses?pageNumber=2&pageSize=10
+
+    const pageNumber = 2;
+    const pageSize = 10;
+
 
     // const courses = await Course.find(); // Listing all items
     const courses = await Course
@@ -57,12 +62,13 @@ async function getCourses() {
 
                            // Ends with Hamedani
                             .find({author: /Hamedani$/i }) // i for case insensitive
-
+                    
                           // Contains Mosh
                             .find({ author: /.*Mosh.*/i})
-                            .limit(10)
+                            .skip((pageNumber - 1) * pageSize)
+                            .limit(pageSize)
                             .sort({name:1})
-                            .select({name: 1, tags: 1});
+                            .select({name: 1, tags: 1}); // .count()
     console.log(courses);
 }
 
