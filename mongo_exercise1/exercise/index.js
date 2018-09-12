@@ -5,8 +5,14 @@ mongoose.connect("mongodb://localhost/mongo-exercises")
             .then(() => console.log("Connected to MongoDB"))
             .catch(err => console.error("Could not connect to MongoDB", err));
 
-const courseSchema = new mongoose.Schema({});
-
+            const courseSchema = new mongoose.Schema({
+                name: String,
+                author: String,
+                tags: [String],
+                date: { type: Date, default: Date.now},
+                isPublished: Boolean
+            });
+            
 const Course = mongoose.model("Course", courseSchema);
 
 async function getCourses() {
@@ -39,4 +45,44 @@ async function exercise3() {
     console.log(courses);
 }
 
-exercise3();
+//exercise3();
+
+async function updateCourse(id) {
+    // Approach: Query First
+    // findById()
+    // Modify its properties
+    // save()
+
+    // Approach: Update first
+    // Update directly
+    // Optionally: get the updated document
+
+    console.log(id);
+    try{
+        const course = await Course.findById(id);
+
+
+
+    // if(!course) return;
+ 
+     course.isPublished = true;
+     course.author = "Another Author";
+     
+     const result = await course.save();
+     console.log(result);
+    }
+    catch(e) {
+        console.log("Erroror", e);
+    }
+  
+    /*
+    course.set({
+        isPublished: true,
+        author: "Another Author"
+    });
+    */
+}
+//exercise2();
+updateCourse('5a68fdc3615eda645bc6bdec'); // database related issue it didnt work this database I will check later
+
+// I solved as I said it is about ObjectId("") prefix
