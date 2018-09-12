@@ -83,6 +83,23 @@ async function updateCourse(id) {
     */
 }
 //exercise2();
-updateCourse('5a68fdc3615eda645bc6bdec'); // database related issue it didnt work this database I will check later
+//updateCourse('5a68fdc3615eda645bc6bdec'); // database related issue it didnt work this database I will check later
 
 // I solved as I said it is about ObjectId("") prefix
+
+
+
+//Update First
+
+async function updateCourse2(id) {
+    const result = await Course.update({_id:id}, {
+        $set: { // it update in the database
+            author: "Mosh",
+            isPublished: false
+        }
+    });
+    // findByIdAndUpdate
+    console.log(result);
+}
+
+updateCourse2("5a68fdc3615eda645bc6bdec");
