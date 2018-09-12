@@ -6,18 +6,36 @@ mongoose.connect("mongodb://localhost/mongo-exercises")
 
 
 const courseSchema = new mongoose.Schema({
-    name: {type: String, required: true}, // name is required
+    name: {
+        type: String, 
+        required: true,
+        minlength: 5,
+        maxlength: 255,
+        // match: /pattern/ // regular expression can be applied
+    }, // name is required (mongoose) 
+    category: {
+        type: String,
+        required: true,
+        enum: ["web", "mobile", "network"]
+    },
     author: String,
     tags: [String],
     date: { type: Date, default: Date.now},
-    isPublished: Boolean
+    isPublished: Boolean,
+    price :{
+        type: Number,
+        required: function() { return this.isPublished; },
+        min: 10,
+        max: 200
+    }
 });
 
 const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
     const course = new Course({
-      //  name: "Angular Course",
+        name: "Angular Course",
+        category: "-",
         author: "Furkan",
         tags: ["angular", "frontend"],
         isPublished: true,
@@ -25,6 +43,7 @@ async function createCourse() {
     });
 
     try {
+        // await course.validate();
         const result = await course.save();
         console.log(result);
     }
