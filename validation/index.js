@@ -11,6 +11,8 @@ const courseSchema = new mongoose.Schema({
         required: true,
         minlength: 5,
         maxlength: 255,
+        lowercase: true, // automatically convert to lower case value
+        trim: true //  removes padding
         // match: /pattern/ // regular expression can be applied
     }, // name is required (mongoose) 
     category: {
@@ -40,9 +42,13 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         required: function() { return this.isPublished; },
         min: 10,
-        max: 200
+        max: 200,
+        get: v => Math.round(v),
+        set: v => Math.round(v)
     }
 });
+
+
 
 const Course = mongoose.model("Course", courseSchema);
 
