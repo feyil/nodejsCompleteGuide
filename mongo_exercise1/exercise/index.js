@@ -102,4 +102,11 @@ async function updateCourse2(id) {
     console.log(result);
 }
 
-updateCourse2("5a68fdc3615eda645bc6bdec");
+// updateCourse2("5a68fdc3615eda645bc6bdec");
+
+async function removeCourse(id) {
+    const result = await Course.deleteOne({_id: id});
+    console.log(result);
+}
+
+removeCourse("5a68fdc3615eda645bc6bdec");
