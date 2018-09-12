@@ -17,5 +17,26 @@ async function getCourses() {
     console.log(courses);
 }
 
-getCourses();
+// getCourses();
 
+async function exercise2() {
+    const courses = await Course
+                            .find({isPublished: true})
+                            .or([{tags: "frontend"}, {tags: "backend"}])
+                            .sort({price: -1})
+                            .select({name:1, author: 1, price: 1});
+    console.log(courses);
+}
+
+//exercise2();
+
+async function exercise3() {
+    const courses = await Course
+                            .find({isPublished: true})
+                            .or([{price: {$gte : 15}}, {name: /.*by.*/}]);
+
+
+    console.log(courses);
+}
+
+exercise3();
