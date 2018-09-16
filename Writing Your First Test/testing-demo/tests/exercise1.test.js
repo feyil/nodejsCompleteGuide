@@ -19,4 +19,9 @@ describe("fizzBuzz", () => {
         const result = exercise1.fizzBuzz(5);
         expect(result).toBe("Buzz");  
       });
+
+    it("if it is not divisible by 5 or 3 return input", () => {
+        const result = exercise1.fizzBuzz(17);
+        expect(result).toBe(17);
+    });
 });
