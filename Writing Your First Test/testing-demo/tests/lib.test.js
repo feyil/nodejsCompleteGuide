@@ -17,6 +17,15 @@ describe("absolute", () => {
     });
 });
 
+describe("greet", () => {
+    it("should return the greeting message", () => {
+        const result = lib.greet("Furkan");
+        expect(result).toMatch(/Furkan/);
+        expect(result).toContain("Furkan");
+
+        // do not make too specific test in some cases
+        });
+});
 
 
 
