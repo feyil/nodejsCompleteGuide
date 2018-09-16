@@ -15,6 +15,11 @@ const auth = require('./routes/auth');
 const express = require('express');
 const app = express();
 
+process.on("uncaughtException", (ex) => {
+  console.log("We got an uncaught exception.");
+  winston.error(ex.message, ex);
+});
+
 
 winston.add(new winston.transports.File({ filename: "logfile.log" })); 
 winston.add(new winston.transports.Console());
