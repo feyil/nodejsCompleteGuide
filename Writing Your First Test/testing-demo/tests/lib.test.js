@@ -88,3 +88,7 @@ describe("registerUser", () => {
 });
 
 // Matcher functions documentation
+
+
+// if error occurs when using jest --watchAll
+// echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
