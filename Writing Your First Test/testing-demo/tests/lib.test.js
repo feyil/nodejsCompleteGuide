@@ -65,4 +65,26 @@ describe("getProduct", () => {
     });
 });
 
+describe("registerUser", () => {
+    it("should throw if username is falsy", () => {
+        // Null
+        // undefined
+        // NaN
+        // ""
+        // 0
+        // false
+        const args = [null, undefined, NaN, "", 0, false];
+        args.forEach(a => {
+            expect(() => { lib.registerUser(a)}).toThrow();
+        })
+      //  expect(() => { lib.registerUser(null)}).toThrow();
+    });
+
+    it("shoudl return a user object if valid username is passed", () => {
+        const result = lib.registerUser("Furkan");
+        expect(result).toMatchObject({ username: "Furkan"});
+        expect(result.id).toBeGreaterThan(0); // To ensure date is valid
+    });
+});
+
 // Matcher functions documentation
