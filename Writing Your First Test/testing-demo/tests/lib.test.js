@@ -1,4 +1,5 @@
 const lib = require("../lib");
+const db = require("../db");
 
 describe("absolute", () => {
     it("absolute - should return a positive number if input is positive", () => {
@@ -80,12 +81,25 @@ describe("registerUser", () => {
       //  expect(() => { lib.registerUser(null)}).toThrow();
     });
 
-    it("shoudl return a user object if valid username is passed", () => {
+    it("should return a user object if valid username is passed", () => {
         const result = lib.registerUser("Furkan");
         expect(result).toMatchObject({ username: "Furkan"});
         expect(result.id).toBeGreaterThan(0); // To ensure date is valid
     });
+
+    it("should apply 10% discount if customer has more than 10 points", () => {
+        db.getCustomerSync = function(customerId) {
+            console.log("Fake reading customer");
+            return { id: customerId, points: 20};
+         }
+
+         const order = { customerId: 1, totalPrice:10 };
+         lib.applyDiscount(order);
+         expect(order.totalPrice).toBe(9);
+    })
 });
+
+
 
 // Matcher functions documentation
 
